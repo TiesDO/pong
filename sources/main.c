@@ -76,6 +76,7 @@ int main(void) {
   init_ball(&ball);
 
   while (!WindowShouldClose()) {
+		if (IsKeyPressed(KEY_ESCAPE)) { break; }
     process_movement(&player);
 
     // Drawing
