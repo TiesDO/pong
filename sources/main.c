@@ -1,9 +1,10 @@
 #include <raylib.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
 
-#include "helpers.h"
+#include "collision.h"
 #include "entities.h"
+#include "helpers.h"
 
 #define WINDOW_TITLE "My Pong"
 
@@ -11,8 +12,8 @@ int main(void) {
   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
   SetTargetFPS(60);
 
-	// setup random seed
-	srand(time(NULL));
+  // setup random seed
+  srand(time(NULL));
 
   t_paddle player, opponent;
   t_ball ball;
@@ -28,7 +29,7 @@ int main(void) {
 
     process_player_movement(&player);
     process_ball_movement(&ball);
-
+		
     // Drawing
     BeginDrawing();
     {
