@@ -1,3 +1,4 @@
+#include "collision.h"
 #include "entities.h"
 #include "helpers.h"
 #include <stdlib.h>
@@ -24,10 +25,26 @@ void process_ball_movement(t_ball *b) {
       b->dir.y *= -1;
     }
 
-		normalize_vec_2(&b->dir);
+    normalize_vec_2(&b->dir);
 
     // update movement
     b->pos_x += b->dir.x * b->speed;
     b->pos_y += b->dir.y * b->speed;
   }
+}
+
+void handle_ball_collision(t_ball *b, t_paddle *p) {
+	// TODO: return the collision point and use it to determine better collide
+  if (!collision_sphere_to_box(b->pos_x, b->pos_y, b->size, p->pos_x, p->pos_y,
+                               10, p->height)) {
+    return;
+  }
+
+	// flip x
+	if (b->pos_x < p->pos_x || b->pos_x > p->pos_x + 10) {
+		b->dir.x *= -1;
+	} else if (b->pos_y < p->pos_y || b->pos_y > p->pos_y + p->height) {
+		b->dir.y *= -1;
+	} 
+
 }

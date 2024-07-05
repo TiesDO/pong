@@ -30,5 +30,6 @@ typedef struct Ball {
 void init_ball(t_ball *b);
 void reset_ball(t_ball *b);
 void process_ball_movement(t_ball *b);
+void handle_ball_collision(t_ball *b, t_paddle *p);
 
 #endif // !ENITIES_H_

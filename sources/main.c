@@ -2,11 +2,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "collision.h"
 #include "entities.h"
 #include "helpers.h"
 
 #define WINDOW_TITLE "My Pong"
+
+// TODO:
+// - better collisions
+// - implement scoring
+// - implement enemy ai
+// - implement spin
+// - implement powerups (speed, slow, net)
+// - mess around with shaders
 
 int main(void) {
   InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
@@ -29,7 +36,9 @@ int main(void) {
 
     process_player_movement(&player);
     process_ball_movement(&ball);
-		
+
+		handle_ball_collision(&ball, &player);
+
     // Drawing
     BeginDrawing();
     {
