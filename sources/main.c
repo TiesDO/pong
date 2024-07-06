@@ -54,7 +54,13 @@ int main(void) {
     BeginDrawing();
     {
       ClearBackground(BLACK);
-			DrawText(TextFormat("%d | %d", player_score, opponent_score), SCREEN_WIDTH / 2, 30, 20, WHITE);
+
+			// Score
+			const char* text = TextFormat("%d | %d", player_score, opponent_score);
+			int offset = MeasureText(text, 20) / 2;
+			DrawText(text, SCREEN_WIDTH / 2 - offset, 30, 20, WHITE);
+
+			// Entities
       draw_paddle(&player);
       draw_paddle(&opponent);
       DrawCircle(ball.pos_x, ball.pos_y, ball.radius, WHITE);
