@@ -45,7 +45,7 @@ int main(void) {
       ClearBackground(BLACK);
       draw_paddle(&player);
       draw_paddle(&opponent);
-      DrawCircle(ball.pos_x, ball.pos_y, ball.size, WHITE);
+      DrawCircle(ball.pos_x, ball.pos_y, ball.radius, WHITE);
     }
     EndDrawing();
   }

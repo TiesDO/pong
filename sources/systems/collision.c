@@ -1,5 +1,6 @@
 #include "collision.h"
 #include <math.h>
+#include <stdio.h>
 
 typedef struct MinMaxBox {
   float min_x;
@@ -28,17 +29,22 @@ bool collision_rect_to_rect(float a_x, float a_y, int a_w, int a_h, float b_x,
           a.max_y >= b.min_y);
 }
 
-bool collision_sphere_to_box(float s_x, float s_y, float s_r, float b_x,
-                             float b_y, float b_w, float b_h) {
-	t_min_max_box b = min_max_box(b_x, b_y, b_w, b_h);
+sphere_box_collision_t collision_sphere_to_box(float s_x, float s_y, float s_r,
+                                               float b_x, float b_y, float b_w,
+                                               float b_h) {
+  t_min_max_box b = min_max_box(b_x, b_y, b_w, b_h);
 
-	float c_x = fmax(b.min_x, fmin(s_x, b.max_x));
-	float c_y = fmax(b.min_y, fmin(s_y, b.max_y));
+  float c_x = fmax(b.min_x, fmin(s_x, b.max_x));
+  float c_y = fmax(b.min_y, fmin(s_y, b.max_y));
 
-	float d_x = s_x - c_x;
-	float d_y = s_y - c_y;
+  float d_x = s_x - c_x;
+  float d_y = s_y - c_y;
 
-	float d_m = sqrtf(d_x * d_x + d_y * d_y);
+  float d_m = sqrtf(d_x * d_x + d_y * d_y);
 
-	return d_m < s_r;
+  return (sphere_box_collision_t){
+      .distance = d_m,
+      .projected_x = c_x,
+      .projected_y = c_y,
+  };
 }

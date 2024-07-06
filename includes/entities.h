@@ -23,7 +23,7 @@ typedef struct Ball {
   float pos_x;
   float pos_y;
   int speed;
-  int size;
+  int radius;
   Vector2 dir;
 } t_ball;
 
